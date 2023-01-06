@@ -7,7 +7,6 @@ pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
-require("collision")()
 -- Widget and layout library
 local wibox = require("wibox")
 -- Theme handling library
@@ -223,7 +222,6 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -285,24 +283,6 @@ globalkeys = gears.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
-              {description = "increase master width factor", group = "layout"}),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
-              {description = "decrease master width factor", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
-              {description = "increase the number of master clients", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
-              {description = "decrease the number of master clients", group = "layout"}),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
-              {description = "increase the number of columns", group = "layout"}),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
-              {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
-              {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-              {description = "select previous", group = "layout"}),
-
     awful.key({ modkey, "Control" }, "n",
               function ()
                   local c = awful.client.restore()
@@ -343,7 +323,7 @@ clientkeys = gears.table.join(
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey}, "q",      function (c) c:kill()                                     end,
               {description = "close", group = "custom"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle,
+    awful.key({ modkey}, "space",  awful.client.floating.toggle,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
@@ -493,6 +473,19 @@ awful.rules.rules = {
         }
       }, properties = { floating = true }},
 
+	{ rule = { class = "[Ee]lement" },
+		properties = { screen = 1, tag = "1" },
+	},
+	{ rule = { class = "[Dd]iscord" },
+		properties = { screen = 1, tag = "1" },
+	},
+	{ rule = { class = "[Ff]irefox" },
+		properties = { screen = 2, tag = "1" },
+	},
+	{ rule = { class = "[Ss]potify" },
+		properties = { screen = 1, tag = "1", minimized = true },
+	},
+
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
       }, properties = { titlebars_enabled = false }--Disabled cuz i no like
@@ -576,3 +569,4 @@ awful.spawn.with_shell("feh --no-fehbg --bg-scale '/home/j45/bg/mount.png'")
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("polybar left")
 awful.spawn.with_shell("polybar right")
+awful.spawn.with_shell("flameshot")
