@@ -431,7 +431,9 @@ root.keys(globalkeys)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
+      properties = { 
+		     --border_width = beautiful.border_width,
+                     border_width = 0,
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
                      raise = true,
@@ -566,7 +568,7 @@ beautiful.useless_gap = 5
 --Auto run stuff
 awful.spawn.with_shell("setxkbmap gb")
 awful.spawn.with_shell("feh --no-fehbg --bg-scale '/home/j45/bg/mount.png'")
-awful.spawn.with_shell("picom")
+awful.spawn.with_shell("picom --experimental-backend")
 awful.spawn.with_shell("polybar left")
 awful.spawn.with_shell("polybar right")
 awful.spawn.with_shell("flameshot")
