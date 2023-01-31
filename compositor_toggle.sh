@@ -1,4 +1,8 @@
 #!/bin/bash
 #FILE LOCATION: ~/.config/polybar/compositor_toggle.sh
-killall -9 picom
-picom --experimental-backend &
+if (($(ps -aux | grep [p]icom | wc -l) > 0))
+then
+  pkill -9 picom
+else
+  picom --experimental-backend &
+fi
