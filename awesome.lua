@@ -569,6 +569,5 @@ beautiful.useless_gap = 5
 awful.spawn.with_shell("setxkbmap gb")
 awful.spawn.with_shell("feh --no-fehbg --bg-scale '/home/j45/bg/mount.png'")
 awful.spawn.with_shell("picom --experimental-backend")
-awful.spawn.with_shell("polybar left")
-awful.spawn.with_shell("polybar right")
+awful.spawn.with_shell("/home/j45/.config/awesome/polybar_start.sh")
 awful.spawn.with_shell("flameshot")

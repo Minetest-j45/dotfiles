@@ -4,5 +4,5 @@ if (($(ps -aux | grep [p]icom | wc -l) > 0))
 then
   pkill -9 picom
 else
-  picom &
+  picom --experimental-backend &
 fi
