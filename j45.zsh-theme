@@ -61,6 +61,7 @@ setprompt
 autoload -U add-zsh-hook
 add-zsh-hook precmd  theme_precmd
 
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 fortune | cowsay | lolcat -S 23
 echo
 neofetch
