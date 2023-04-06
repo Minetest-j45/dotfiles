@@ -15,6 +15,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local switcher = require("awesome-switcher")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 --require("awful.hotkeys_popup.keys")
@@ -210,8 +211,9 @@ globalkeys = gears.table.join(
     {description = "open discord", group = "custom"}),
     --Calculator shortcut
     awful.key({ modkey }, "c", function () awful.util.spawn_with_shell("LC_ALL=C rofi -show calc -modi calc -no-show-match -no-sort") end,
-    {description = "open calculator", group = "custom"})
-
+    {description = "open calculator", group = "custom"}),
+    awful.key({ "Mod1",  }, "Tab", function () switcher.switch( 1, "Mod1", "Alt_L", "Shift", "Tab") end,
+    {description = "switch window (awesome-switcher)", group = "custom"})
 )
 
 clientkeys = gears.table.join(
@@ -416,6 +418,13 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 --Gaps
 beautiful.useless_gap = 5
 
+switcher.settings.preview_box_bg = "#303030" 
+switcher.settings.preview_box_border = "#303030"
+switcher.settings.preview_box_title_color = {1,1,1,0.8} 
+switcher.settings.preview_box_fps = 60
+switcher.settings.client_opacity_value = 0.9
+switcher.settings.client_opacity_value_in_focus = 0.9
+
 --Auto run stuff
 awful.spawn.with_shell("setxkbmap gb")
 awful.spawn.with_shell("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
@@ -423,3 +432,4 @@ awful.spawn.with_shell("feh --no-fehbg --bg-scale '/home/j45/bg/mount.png'")
 awful.spawn.with_shell("picom --experimental-backend")
 awful.spawn.with_shell("/home/j45/.config/awesome/polybar_start.sh")
 awful.spawn.with_shell("flameshot")
+awful.spawn.with_shell("nm-applet")
