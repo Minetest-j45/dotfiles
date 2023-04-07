@@ -125,6 +125,48 @@ awful.screen.connect_for_each_screen(function(s)
 end)
 -- }}}
 
+-- {{ Tag Wallpapers
+
+-- https://github.com/awesomeWM/awesome/blob/master/lib/gears/filesystem.lua#L195
+local Gio = require("lgi").Gio
+function get_random_file_from_dir(path, exts, absolute_path)
+    local files, valid_exts = {}, {}
+
+    -- Transforms { "jpg", ... } into { [jpg] = #, ... }
+    if exts then for i, j in ipairs(exts) do valid_exts[j:lower():gsub("^[.]", "")] = i end end
+
+    -- Build a table of files from the path with the required extensions
+    local file_list = Gio.File.new_for_path(path):enumerate_children("standard::*", 0)
+
+    -- This will happen when the directory doesn't exist.
+    if not file_list then return nil end
+
+    for file in function() return file_list:next_file() end do
+        if file:get_file_type() == "REGULAR" then
+            local file_name = file:get_display_name()
+
+            if not exts or valid_exts[file_name:lower():match(".+%.(.*)$") or ""] then
+               table.insert(files, file_name)
+            end
+        end
+    end
+
+    if #files == 0 then return nil end
+
+    -- Return a randomly selected filename from the file table
+    local file = files[math.random(#files)]
+
+    return absolute_path and (path:gsub("[/]*$", "") .. "/" .. file) or file
+end
+
+for s = 1, screen.count() do
+	screen[s]:connect_signal("tag::history::update", function()
+		local surface = gears.surface.load(get_random_file_from_dir("/home/j45/bg/", { "jpg", "png" }, true))
+		gears.wallpaper.maximized(surface)
+	end)
+end
+-- }}_
+
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
     awful.button({ }, 4, awful.tag.viewnext),
@@ -428,7 +470,6 @@ switcher.settings.client_opacity_value_in_focus = 0.9
 --Auto run stuff
 awful.spawn.with_shell("setxkbmap gb")
 awful.spawn.with_shell("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
-awful.spawn.with_shell("feh --no-fehbg --bg-scale '/home/j45/bg/mount.png'")
 awful.spawn.with_shell("picom --experimental-backend")
 awful.spawn.with_shell("/home/j45/.config/awesome/polybar_start.sh")
 awful.spawn.with_shell("flameshot")
