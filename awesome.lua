@@ -159,9 +159,18 @@ function get_random_file_from_dir(path, exts, absolute_path)
     return absolute_path and (path:gsub("[/]*$", "") .. "/" .. file) or file
 end
 
+local screen2tag2wallpaper = {}
 for s = 1, screen.count() do
+	screen2tag2wallpaper[screen[s].index] = {}
 	screen[s]:connect_signal("tag::history::update", function()
-		local surface = gears.surface.load(get_random_file_from_dir("/home/j45/bg/", { "jpg", "png" }, true))
+		local surface
+		if screen2tag2wallpaper[screen[s].index][screen[s].selected_tag.name] == nil then
+			local rand = get_random_file_from_dir("/home/j45/bg/", { "jpg", "png" }, true)
+			screen2tag2wallpaper[screen[s].index][screen[s].selected_tag.name] = rand
+			surface = gears.surface.load(rand)
+		else
+			surface = gears.surface.load(screen2tag2wallpaper[screen[s].index][screen[s].selected_tag.name])
+		end
 		gears.wallpaper.maximized(surface)
 	end)
 end
@@ -200,8 +209,14 @@ globalkeys = gears.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
+    awful.key({ modkey,           }, "w",
+    	function ()
+		local rand = get_random_file_from_dir("/home/j45/bg/", { "jpg", "png" }, true)
+  		screen2tag2wallpaper[client.focus.screen.index][client.focus.screen.selected_tag.name] = rand
+		surface = gears.surface.load(rand)
+		gears.wallpaper.maximized(surface)
+	end,
+        {description = "change wallpaper for current tag", group = "client"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
