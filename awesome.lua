@@ -12,7 +12,6 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local hotkeys_popup = require("awful.hotkeys_popup")
-local switcher = require("awesome-switcher")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 --require("awful.hotkeys_popup.keys")
@@ -135,15 +134,13 @@ end
 local screen2tag2wallpaper = {}
 for s = 1, screen.count() do
 	screen2tag2wallpaper[screen[s].index] = {}
+	for _, k in pairs(screen[s].tags) do
+		local rand = get_random_file_from_dir("/home/j45/bg/", { "jpg", "png" }, true)
+		screen2tag2wallpaper[screen[s].index][k.name] = rand
+
+	end
 	screen[s]:connect_signal("tag::history::update", function()
-		local surface
-		if screen2tag2wallpaper[screen[s].index][screen[s].selected_tag.name] == nil then
-			local rand = get_random_file_from_dir("/home/j45/bg/", { "jpg", "png" }, true)
-			screen2tag2wallpaper[screen[s].index][screen[s].selected_tag.name] = rand
-			surface = gears.surface.load(rand)
-		else
-			surface = gears.surface.load(screen2tag2wallpaper[screen[s].index][screen[s].selected_tag.name])
-		end
+		local surface = gears.surface.load(screen2tag2wallpaper[screen[s].index][screen[s].selected_tag.name])
 		gears.wallpaper.maximized(surface)
 	end)
 end
@@ -241,9 +238,7 @@ globalkeys = gears.table.join(
     {description = "open discord", group = "custom"}),
     --Calculator shortcut
     awful.key({ modkey }, "c", function () awful.util.spawn_with_shell("LC_ALL=C rofi -show calc -modi calc -no-show-match -no-sort") end,
-    {description = "open calculator", group = "custom"}),
-    awful.key({ "Mod1",  }, "Tab", function () switcher.switch( 1, "Mod1", "Alt_L", "Shift", "Tab") end,
-    {description = "switch window (awesome-switcher)", group = "custom"})
+    {description = "open calculator", group = "custom"})
 )
 
 clientkeys = gears.table.join(
@@ -447,13 +442,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 --Gaps
 beautiful.useless_gap = 5
-
-switcher.settings.preview_box_bg = "#303030" 
-switcher.settings.preview_box_border = "#303030"
-switcher.settings.preview_box_title_color = {1,1,1,0.8} 
-switcher.settings.preview_box_fps = 60
-switcher.settings.client_opacity_value = 0.9
-switcher.settings.client_opacity_value_in_focus = 0.9
 
 --Auto run stuff
 awful.spawn.with_shell("setxkbmap gb")
