@@ -131,16 +131,17 @@ function get_random_file_from_dir(path, exts, absolute_path)
     return absolute_path and (path:gsub("[/]*$", "") .. "/" .. file) or file
 end
 
+local prefix = "/home/j45/bg/"
 local screen2tag2wallpaper = {}
 for s = 1, screen.count() do
 	screen2tag2wallpaper[screen[s].index] = {}
 	for _, k in pairs(screen[s].tags) do
-		local rand = get_random_file_from_dir("/home/j45/bg/", { "jpg", "png" }, true)
+		local rand = get_random_file_from_dir(prefix, { "jpg", "png" }, false)
 		screen2tag2wallpaper[screen[s].index][k.name] = rand
 
 	end
 	screen[s]:connect_signal("tag::history::update", function()
-		local surface = gears.surface.load(screen2tag2wallpaper[screen[s].index][screen[s].selected_tag.name])
+		local surface = gears.surface.load(prefix..screen2tag2wallpaper[screen[s].index][screen[s].selected_tag.name])
 		gears.wallpaper.maximized(surface)
 	end)
 end
@@ -181,9 +182,9 @@ globalkeys = gears.table.join(
     ),
     awful.key({ modkey,           }, "w",
     	function ()
-		local rand = get_random_file_from_dir("/home/j45/bg/", { "jpg", "png" }, true)
+		local rand = get_random_file_from_dir(prefix, { "jpg", "png" }, false)
   		screen2tag2wallpaper[client.focus.screen.index][client.focus.screen.selected_tag.name] = rand
-		surface = gears.surface.load(rand)
+		surface = gears.surface.load(prefix..rand)
 		gears.wallpaper.maximized(surface)
 	end,
         {description = "change wallpaper for current tag", group = "client"}),
