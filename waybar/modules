@@ -1,0 +1,133 @@
+{
+	"wlr/workspaces": {
+	    "on-click": "activate",
+        "format": "{icon}",
+        "format-icons": {
+            "11": "1",
+            "12": "2",
+            "13": "3",
+            "14": "4",
+            "15": "5",
+            "16": "6",
+            "17": "7",
+            "18": "8",
+            "19": "9",
+        },
+        "persistent_workspaces": {
+            "1": ["DP-1"],
+            "2": ["DP-1"],
+            "3": ["DP-1"],
+            "4": ["DP-1"],
+            "5": ["DP-1"],
+            "6": ["DP-1"],
+            "7": ["DP-1"],
+            "8": ["DP-1"],
+            "9": ["DP-1"],
+            "11": ["HDMI-A-1"],
+            "12": ["HDMI-A-1"],
+            "13": ["HDMI-A-1"],
+            "14": ["HDMI-A-1"],
+            "15": ["HDMI-A-1"],
+            "16": ["HDMI-A-1"],
+            "17": ["HDMI-A-1"],
+            "18": ["HDMI-A-1"],
+            "19": ["HDMI-A-1"],
+        },
+    },
+	
+	// waybar-clock
+    "clock": {
+		"interval": 1,
+		"align": 0,
+		"rotate": 0,
+        "format": " {:%H:%M:%S %d/%m/%Y}",
+        "format-alt": " {:%a %b %d, %G}",
+         "tooltip": false,
+    },
+
+	// waybar-cpu
+    "cpu": {
+         "interval": 5,
+         "tooltip": false,
+         "format": " {usage}%",
+    },
+           
+	// waybar-custom
+    "custom/menu": {
+         "format": "#",
+         "tooltip": false,
+         "on-click": "wofi",
+    },
+
+    //harddrive
+    "custom/harddrive": {
+        "interval": 30,
+        "tooltip": false,
+        "format": "/mnt/hdd: {}",
+        "exec": "df -h /mnt/hdd | grep '/mnt/hdd' | awk '{print $4}'",
+    },
+
+	// nvme
+    "custom/nvme": {
+         "interval": 30,
+         "tooltip": false,
+         "format": "/: {}",
+         "exec": "df -h / | grep '/' | awk '{print $4}'",
+    },           	
+	
+	// memory-custom
+    "custom/memory": {
+         "interval": 5,
+         "tooltip": false,
+         "format": " {}%",
+         "exec": "free -m | awk '/Mem/{printf(\"%1.0f\"), $3/$2*100}'",
+    },
+           
+	// spotify-custom
+    "custom/spotify": {
+        "interval": 1,
+        "format": "{}",
+        "max-length": 40,
+        "exec": "spotifyc -f '{{ icon }} {{ title }} - {{ artist }}' -i '' '' -o",
+        "exec-if": "pgrep -x spotify",
+        "on-click": "spotifyc -c",
+        "on-scroll-up": "spotifyc -n",
+        "on-scroll-down": "spotifyc -p",
+         "tooltip": false,
+    },
+
+	//waybar-network
+    "network": {
+		"interval": 5,
+        //"interface": "wlan*", // (Optional) To force the use of this interface, set it for netspeed to work
+        "format-wifi": " {essid}",
+        "format-ethernet": " {ipaddr}/{cidr}",
+        "format-linked": " {ifname} (No IP)",
+        "format-disconnected": "睊 Disconnected",
+        "format-disabled": "睊 Disabled",
+        "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
+         "tooltip": false,
+    },
+	
+	// waybar-pulseaudio
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": " Mute",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+        },
+        "scroll-step": 5.0,
+		// Commands to execute on events
+        "on-click": "pavucontrol",
+        "smooth-scrolling-threshold": 1,
+         "tooltip": false,
+    },
+
+	// waybar-tray
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+}

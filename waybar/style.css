@@ -1,0 +1,120 @@
+* {
+    font-family: "JetBrains Mono";
+    font-size: 15px;
+}
+
+window#waybar {
+    background-color: #22273b;
+	color: #1e1e2e;
+    border: 2px solid #313244;
+    border-radius: 10px;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.5;
+}
+
+#clock {
+	color: #a4a6a9;
+}
+
+#cpu {
+	color: #4f9062;
+}
+
+#tray {
+	background-color: #3f425d;
+}
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+#tray > .active {
+}
+
+#pulseaudio {
+	color: #8c70a7;
+}
+
+#pulseaudio.muted {
+	background-color: #313244;
+	color: #707880;
+}
+
+#workspaces button label {
+    color: #999999;
+}
+
+#workspaces button.active label {
+    color: #a4a6a9;
+}
+
+#workspaces button.active {
+    background-color: #333e59;
+}
+
+#workspaces button.urgent label {
+    color: #fca26e;
+}
+
+#workspaces button.persistent label {
+    color: #555555;
+}
+
+#network {
+	color: #89b4fa;
+}
+
+#network.disconnected,#network.disabled {
+	background-color: #313244;
+	color: #cdd6f4;
+}
+#network.linked {
+}
+#network.ethernet {
+}
+#network.wifi {
+}
+
+#custom-menu, #custom-spotify, #custom-harddrive, #custom-nvme, #custom-memory {
+	border-radius: 4px;
+	margin: 6px 0px;
+	padding: 2px 8px;
+}
+
+#custom-spotify {
+  color: #1db954;
+}
+
+#custom-memory {
+	color: #4d6bb6;
+}
+
+#custom-menu {
+	background-color: #716cae;
+	margin-left: 6px;
+	padding: 2px 6px;
+	font-size: 16px;
+}
+
+#custom-harddrive {
+    color: #777abc;
+}
+
+#custom-nvme {
+	color: #b4befe;
+}
+
+#clock,
+#cpu,
+#tray,
+#pulseaudio,
+#network {
+	border-radius: 4px;
+	margin: 6px 0px;
+	padding: 2px 8px;
+}
