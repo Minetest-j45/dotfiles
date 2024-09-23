@@ -3,12 +3,11 @@
     "name": "main-bar",
     "id": "main-bar",
     "layer": "top",
-    "mode": "dock",
     "exclusive": true,
     "passthrough": false,
     "position": "top",
     "output": "DP-1",
-    "height": 42,
+    "height": 48,
     "width": "",
     "spacing": 7,
     "margin": 0,
@@ -21,19 +20,18 @@
  
     "modules-left": ["custom/menu", "wlr/workspaces"],
     "modules-center": ["custom/spotify"],
-    "modules-right": ["network"],
+    "modules-right": ["bluetooth", "network"],
 },
 {
     "include": "~/.config/waybar/modules",
     "name": "main-bar",
     "id": "main-bar",
     "layer": "top",
-    "mode": "dock",
     "exclusive": true,
     "passthrough": false,
     "position": "top",
     "output": "HDMI-A-1",
-    "height": 42,
+    "height": 48,
     "width": "",
     "spacing": 7,
     "margin": 0,
@@ -46,7 +44,7 @@
  
     "modules-left": ["wlr/workspaces"],
     "modules-center": ["tray"],
-    "modules-right": ["custom/harddrive", "custom/nvme", "pulseaudio", "custom/memory", "cpu", "clock"],
+    "modules-right": ["disk#hdd", "disk#nvme", "custom/nvme", "pulseaudio", "custom/memory", "cpu", "clock"],
 }]
 
 

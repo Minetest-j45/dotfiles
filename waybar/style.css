@@ -80,6 +80,10 @@ window#waybar.hidden {
 #network.wifi {
 }
 
+#bluetooth {
+    color: #63c5da;
+}
+
 #custom-menu, #custom-spotify, #custom-harddrive, #custom-nvme, #custom-memory {
 	border-radius: 4px;
 	margin: 6px 0px;
@@ -101,17 +105,18 @@ window#waybar.hidden {
 	font-size: 16px;
 }
 
-#custom-harddrive {
+#disk.hdd {
     color: #777abc;
 }
 
-#custom-nvme {
+#disk.nvme {
 	color: #b4befe;
 }
 
 #clock,
 #cpu,
 #tray,
+#disk,
 #pulseaudio,
 #network {
 	border-radius: 4px;

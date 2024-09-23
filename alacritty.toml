@@ -1,0 +1,34 @@
+# ~/.config/alacritty/alacritty.toml
+[colors.bright]
+black = "0x6e6f72"
+blue = "0x87888b"
+cyan = "0x8c70a7"
+green = "0x414f60"
+magenta = "0xc7c9cd"
+red = "0x94929e"
+white = "0x8dbdaa"
+yellow = "0x5a8380"
+
+[colors.cursor]
+cursor = "0xa4a6a9"
+text = "0x22273b"
+
+[colors.normal]
+black = "0x22273b"
+blue = "0x4d6bb6"
+cyan = "0x226f68"
+green = "0x6562a8"
+magenta = "0x716cae"
+red = "0x777abc"
+white = "0xa4a6a9"
+yellow = "0x4f9062"
+
+[colors.primary]
+background = "0x22273b"
+foreground = "0xa4a6a9"
+
+[shell]
+program = "/bin/zsh"
+
+[window]
+opacity = 0.8

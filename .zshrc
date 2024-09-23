@@ -5,6 +5,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+export PATH=$PATH:$HOME/.cargo/bin
+
 # You may need to manually set your language environment
 export LANG=en_GB.UTF-8
 export LANGUAGE=en_GB.UTF-8
@@ -82,6 +84,35 @@ HIST_STAMPS="dd/mm/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
+# https://github.com/LukeSmithxyz/voidrice/blob/5c92a1770f1a496cfa188632e2bf3d34bd325ad4/.config/shell/profile#L23
+# https://www.youtube.com/watch?v=yy8RoDSdhIQ
+# https://wiki.archlinux.org/title/XDG_Base_Directory
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
+export GOPATH="$XDG_DATA_HOME/go"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
+export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
+export PYTHONUSERBASE="$XDG_DATA_HOME/python"
+export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
+export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
+export VIMINIT='let $MYVIMRC = !has("nvim") ? "$XDG_CONFIG_HOME/vim/vimrc" : "$XDG_CONFIG_HOME/nvim/init.lua" | so $MYVIMRC'
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+
+# https://stackoverflow.com/a/71271754
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+
 source $ZSH/oh-my-zsh.sh
 #source $ZSH/themes/j45.zsh-theme
 
@@ -89,7 +120,7 @@ source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-export EDITOR='nano'
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -103,3 +134,4 @@ export EDITOR='nano'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias die="shutdown now"
